@@ -5,8 +5,8 @@ import { createStore, applyMiddleware } from 'redux';
 
 import { BrowserRouter, Route } from 'react-router-dom';
 
-import App from './components/app';
 import reducers from './reducers';
+import PostsIndex from './components/posts-index';
 
 // app already set up to handle middleware
 const createStoreWithMiddleware = applyMiddleware()(createStore);
@@ -15,26 +15,29 @@ const createStoreWithMiddleware = applyMiddleware()(createStore);
   Test components for routes
 */
 
-class Hello extends React.Component {
-  render() { return <div>Hello!</div> };
-}
-
-class Goodbye extends React.Component {
-  render() { return <div>Goodbye!</div> };
-}
+// class HelloComponent extends React.Component {
+//   render() { return <div>Hello!</div> };
+// }
+//
+// class GoodbyeComponent extends React.Component {
+//   render() { return <div>Goodbye!</div> };
+// }
 
 /*
   BrowserRouter can only have one child element, so multiple routes need to be wrapped in a <div>.
   <Route> components have two parameters: path ('/hello') and component ({ Hello })
+
+  Using BrowserRouter, application no longer uses <App /> as its root component
 */
 
 ReactDOM.render(
   <Provider store={createStoreWithMiddleware(reducers)}>
     <BrowserRouter>
-      <div>
-        <h1>Header on All Routes</h1>
-        <Route path="/hello" component={ Hello } />
-        <Route path="/goodbye" component={ Goodbye } />
+      <div className="container">
+        {/* <h1>React Router</h1> */}
+        {/* <Route path="/hello" component={ HelloComponent } /> */}
+        {/* <Route path="/goodbye" component={ GoodbyeComponent } /> */}
+        <Route path="/" component={PostsIndex} />
       </div>
     </BrowserRouter>
   </Provider>
