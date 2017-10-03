@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchPosts } from '../actions';
 
 /*
   Index API call gets back a list of post objects with properties.
@@ -16,6 +18,14 @@ import React, { Component } from 'react';
 */
 
 class PostsIndex extends Component {
+  // when component is about to be shown on screen, make call to API using
+  // action creator using lifecycle methods
+
+  componentDidMount() {
+    // when component shows up in DOM, kick off data loading process
+    this.props.fetchPosts();
+  }
+
   render() {
     return(
       <div>
@@ -25,4 +35,8 @@ class PostsIndex extends Component {
   }
 }
 
-export default PostsIndex;
+// Since action is being called directly without requiring custom data
+// manipulation, use connect action creator directly instead of using
+// mapDispatchToProps
+
+export default connect(null, { fetchPosts }) (PostsIndex);
