@@ -1,7 +1,9 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
+
 // imports to bind action to this component
 import { connect } from 'react-redux';
+
 // import Link component from react
 import { Link } from 'react-router-dom';
 
