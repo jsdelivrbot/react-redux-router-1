@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-import FETCH_POSTS from '../actions';
+import { FETCH_POSTS } from '../actions';
 
 /*
   Default state is an empty object
