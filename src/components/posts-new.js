@@ -10,8 +10,13 @@ import { Field, reduxForm } from 'redux-form';
 class PostsNew extends Component {
   // render label and input for <Field> component
   renderField(field) {
+    // get meta values for touched and error from field.meta object
+    const { meta: { touched, error } } = field;
+    // define className based on values in field.meta touched and error
+    const className = `form-group ${touched && error ? 'has-danger' : ''}`;
+
     return (
-      <div className="form-group">
+      <div className={className}>
         <label>{field.label}</label>
         <input
           className="form-control"
@@ -19,8 +24,8 @@ class PostsNew extends Component {
           {...field.input}
         />
         {/* show field.meta.error after user has touched field */}
-        <small className="form-text text-muted">
-          {field.meta.touched ? field.meta.error : ''}
+        <small className="text-help">
+          {touched ? error : ''}
         </small>
       </div>
     );
