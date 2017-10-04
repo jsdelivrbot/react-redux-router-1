@@ -10,7 +10,7 @@ import { Field, reduxForm } from 'redux-form';
 class PostsNew extends Component {
   // render label and input for <Field> component
   renderField(field) {
-    return(
+    return (
       <div className="form-group">
         <label>{field.label}</label>
         <input
@@ -18,14 +18,17 @@ class PostsNew extends Component {
           type="text"
           {...field.input}
         />
-        {field.meta.error}
+        {/* show field.meta.error after user has touched field */}
+        <small className="form-text text-muted">
+          {field.meta.touched ? field.meta.error : ''}
+        </small>
       </div>
     );
   }
 
   // form's onSubmit action
   onSubmit(values) {
-    console.log(values)
+    console.log(values);
   }
 
   render() {
