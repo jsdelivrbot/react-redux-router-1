@@ -23,9 +23,19 @@ class PostsNew extends Component {
     );
   }
 
+  // form's onSubmit action
+  onSubmit(values) {
+    console.log(values)
+  }
+
   render() {
+    // Redux form is wired up to this form using ReduxForm helper below
+    // props are passed when ReduxForm processes form
+    const { handleSubmit } = this.props;
+
     return(
-      <form>
+      // define onSubmit as callback with proper `this` binding
+      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <Field
           label="Title"
           name="title"
@@ -41,6 +51,9 @@ class PostsNew extends Component {
           name="content"
           component={this.renderField}
         />
+        <button type="submit" className="btn btn-primary">
+          Submit
+        </button>
       </form>
     );
   }
