@@ -18,6 +18,7 @@ class PostsNew extends Component {
           type="text"
           {...field.input}
         />
+        {field.meta.error}
       </div>
     );
   }
@@ -60,21 +61,16 @@ function validate(values) {
   // return empty object if no errors
   const errors = {};
 
-  // validate inputs from 'values'
-  if (values.title.length < 3) {
-    errors.title = "Enter a title for your post that is at least 3 characters.";
-  }
-
   if (!values.title ) {
     errors.title = "Enter a title for your post.";
   }
 
   if (!values.categories) {
-    errors.title = "Enter categories for your post.";
+    errors.categories = "Enter categories for your post.";
   }
 
   if (!values.content) {
-    errors.title = "Enter content for yoru new post.";
+    errors.content = "Enter content for your new post.";
   }
 
   // if errors is an empty object, there are no issues with validation
