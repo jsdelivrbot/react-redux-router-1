@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
-
+import { connect } from 'react-redux';
+import { createPost } from '../actions';
 /*
    connect Field object passed in by default by redux form Field component
    use `...field.input` to get all the different properties of input and
@@ -33,8 +34,10 @@ class PostsNew extends Component {
   }
 
   // form's onSubmit action
+  // passes values to createPost action creator
   onSubmit(values) {
-    console.log(values);
+    // console.log(values);
+    this.props.createPost(values);
   }
 
   render() {
@@ -107,9 +110,13 @@ function validate(values) {
   reduxForm takes a configuration object as its argument:
    - 'validate' is the declared validate() function
    - `form` with a unique string as ID
+
+  connect is added inside second set of parens for reduxForm helper
 */
 
 export default reduxForm({
   validate, // key and value are the same
   form: 'PostsNewForm'
-})(PostsNew);
+})(
+  connect(null, { createPost })(PostsNew)
+);
