@@ -7,32 +7,34 @@ import { connect } from 'react-redux';
 // import Link component from react
 import { Link } from 'react-router-dom';
 
+// import fetchPosts action creator
 import { fetchPosts } from '../actions';
 
 /*
   Index API call gets back a list of post objects with properties.
 
-  Storing posts in a `posts` object using ids as keys with data objects as values:
+  By storing posts in a `posts` object using ids as keys with data objects
+  as values instead:
 
   {
     4:  { title: "Hello", id: 4, content: "Hi", tags: "greetings" }.
     12: { title: "Bye", id: 12, content: "Bye", tags: "greetings" }.
   }
 
-  An individual post can then be referred to by id as:
+  an individual post can then be referred to by id as:
 
     state.posts[postId]
 */
 
 class PostsIndex extends Component {
   // when component is about to be shown on screen, make call to API using
-  // action creator using lifecycle methods
-
+  // action creator using componentDidMountlifecycle method
   componentDidMount() {
-    // when component shows up in DOM, kick off data loading process
     this.props.fetchPosts();
   }
 
+  // use lodash map function to generate a list of <li> elements containing
+  // links to individual posts
   renderPosts() {
     return _.map(this.props.posts, post => {
       return (
@@ -45,10 +47,8 @@ class PostsIndex extends Component {
     });
   }
 
-/*
-  Use React <Link /> component with "to" property indicating destination route
-*/
-
+  // Use React <Link /> component with "to" property indicating
+  // destination route
   render() {
     return(
       <div>

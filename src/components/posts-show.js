@@ -5,13 +5,13 @@ import { deletePost } from '../actions';
 import { Link } from 'react-router-dom';
 
 /*
-
+  PostsShow(): show individual post
 */
 
 class PostsShow extends Component {
+  // if post is already fetched, just shown
+  // if post has not been fetched, get it
   componentDidMount() {
-    // if post is already fetched, just shown
-    // if post has not been fetched, get it
     if (!this.props.post) {
       // provided by react router as param `id`
       const { id } = this.props.match.params;
@@ -24,7 +24,7 @@ class PostsShow extends Component {
   // pass navigation callback (.push('/')) for after delete is successful
   onDeleteClick() {
     const { id } = this.props.match.params;
-    
+
     this.props.deletePost(id, () => {
       this.props.history.push('/');
     });
@@ -33,6 +33,7 @@ class PostsShow extends Component {
   render() {
     const { post } = this.props;
 
+    // NOTE: post is undefined when application first loads
     if (!post) {
       return <div>Loading...</div>;
     }
@@ -55,9 +56,7 @@ class PostsShow extends Component {
 
 /*
   use second argument, ownProps, the props for this component
-  this.props === ownProps
-
-  post is undefined when application first loads
+    this.props === ownProps
 */
 
 function mapStateToProps({ posts }, ownProps) {

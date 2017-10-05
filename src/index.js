@@ -2,12 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
+
 // include to handle promises from AJAX calls
 import promise from 'redux-promise';
 
+// include router, route, and switch components from react-router
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
+// import reducers
 import reducers from './reducers';
+
+// import custom components
 import PostsIndex from './components/posts-index';
 import PostsNew from './components/posts-new';
 import PostsShow from './components/posts-show';
@@ -16,14 +21,17 @@ import PostsShow from './components/posts-show';
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
 /*
-  BrowserRouter can only have one child element, so multiple routes need to be wrapped in a <div>.
+  BrowserRouter can only have one child element, so multiple routes need
+    to be wrapped in a <div>.
 
-  <Route> components have two parameters: path ('/hello') and component ({ Hello })
+  <Route> components have two parameters: path ('/hello') and
+    component ({ Hello })
 
-  Using BrowserRouter, application no longer uses <App /> as its root component
+  Using BrowserRouter, the application no longer uses <App /> as
+    its root component
 
   Using Switch keeps all paths that match path loosely from rendering (`/`)
-  Most specific routes (`/posts/new`) should appear earlier in switch
+  - the most specific routes (`/posts/new`) should appear earlier in switch
 */
 
 ReactDOM.render(
@@ -37,5 +45,6 @@ ReactDOM.render(
         </Switch>
       </div>
     </BrowserRouter>
-  </Provider>
-  , document.querySelector('.container'));
+  </Provider>,
+  document.querySelector('.container')
+);

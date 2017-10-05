@@ -26,20 +26,18 @@ class PostsNew extends Component {
           type="text"
           {...field.input}
         />
-        {/* only show field.meta.error after user has touched field */}
         <small className="text-help">
+          {/* only show field.meta.error after user has touched field */}
           {touched ? error : ''}
         </small>
       </div>
     );
   }
 
-  // form's onSubmit action
-  // passes values to createPost action creator
+  // form's onSubmit action passes values to createPost action creator
   onSubmit(values) {
-    // update route history and navigate to root path
-    // only after post has been created by passing callback function to
-    // createPost
+    // update route history and navigate to root path after post has been
+    // created by passing callback function to createPost
     this.props.createPost(values, () => {
       this.props.history.push('/');
     });
@@ -122,6 +120,4 @@ function validate(values) {
 export default reduxForm({
   validate, // key and value are the same
   form: 'PostsNewForm'
-})(
-  connect(null, { createPost })(PostsNew)
-);
+})(connect(null, { createPost })(PostsNew));
