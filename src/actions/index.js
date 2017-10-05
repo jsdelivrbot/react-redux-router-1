@@ -22,10 +22,13 @@ export function fetchPosts() {
   - make request using axios
   - return object with action type and request as payload
   - request returns data for post with 'id' added
+
+  Callback function is used to navigate to index after post is created
 */
 
-export function createPost(values) {
-  const request = axios.post(`${ROOT_URL}/posts${API_KEY}`, values);
+export function createPost(values, callback) {
+  const request = axios.post(`${ROOT_URL}/posts${API_KEY}`, values)
+    .then(() => callback());
 
   return {
     type: CREATE_POST,

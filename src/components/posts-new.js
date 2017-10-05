@@ -3,6 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createPost } from '../actions';
+
 /*
    connect Field object passed in by default by redux form Field component
    use `...field.input` to get all the different properties of input and
@@ -25,7 +26,7 @@ class PostsNew extends Component {
           type="text"
           {...field.input}
         />
-        {/* show field.meta.error after user has touched field */}
+        {/* only show field.meta.error after user has touched field */}
         <small className="text-help">
           {touched ? error : ''}
         </small>
@@ -36,8 +37,12 @@ class PostsNew extends Component {
   // form's onSubmit action
   // passes values to createPost action creator
   onSubmit(values) {
-    // console.log(values);
-    this.props.createPost(values);
+    // update route history and navigate to root path
+    // only after post has been created by passing callback function to
+    // createPost
+    this.props.createPost(values, () => {
+      this.props.history.push('/');
+    });
   }
 
   render() {
