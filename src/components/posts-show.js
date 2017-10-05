@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPost } from '../actions';
+import { Link } from 'react-router-dom';
 
 /*
 
@@ -8,9 +9,14 @@ import { fetchPost } from '../actions';
 
 class PostsShow extends Component {
   componentDidMount() {
-    // provided by react router as param `id`
-    const { id } = this.props.match.params;
-    this.props.fetchPost(id);
+    // if post is already fetched, just shown
+    // if post has not been fetched, get it
+    if (!this.props.post) {
+      // provided by react router as param `id`
+      const { id } = this.props.match.params;
+      this.props.fetchPost(id);
+
+    }
   }
 
   render() {
@@ -22,6 +28,8 @@ class PostsShow extends Component {
 
     return (
       <div>
+        <Link to="/">Back to Index</Link>
+
         <h3>{post.title}</h3>
         <h6>Categories: {post.categories}</h6>
         <p>{post.content}</p>
