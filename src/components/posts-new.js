@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { Link } from 'react-router-dom';
 
 /*
    connect Field object passed in by default by redux form Field component
@@ -62,6 +63,9 @@ class PostsNew extends Component {
         <button type="submit" className="btn btn-primary">
           Submit
         </button>
+        <Link to="/" className="btn btn-danger">
+          Cancel
+        </Link>
       </form>
     );
   }
